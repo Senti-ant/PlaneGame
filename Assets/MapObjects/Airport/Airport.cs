@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public class Departure 
+{
+    public FlightPlan plan; public GameObject planePrefab;
+    public Departure(FlightPlan plan, GameObject planePrefab)
+    {
+        this.plan = plan; this.planePrefab = planePrefab;
+    }
+}
+
 public class Airport : MonoBehaviour
 {
     [SerializeField] GameObject ApprovalDialoguePrefab;
     [SerializeField] GameObject FlightPlanLinePrefab;
-
-    class Departure 
-    {
-        public FlightPlan plan; public GameObject planePrefab;
-        public Departure(FlightPlan plan, GameObject planePrefab)
-        {
-            this.plan = plan; this.planePrefab = planePrefab;
-        }
-    }
 
     Queue<Departure> departures;
     Departure next;
@@ -42,6 +42,8 @@ public class Airport : MonoBehaviour
 
     public void EnqueueFlight(FlightPlan flight, GameObject planePrefab) 
         => departures.Enqueue(new Departure(flight, planePrefab));
+    public void EnqueueFlight(Departure departure)
+        => departures.Enqueue(departure);
 
     public void DepartNext()
     {

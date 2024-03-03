@@ -1800,7 +1800,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FetchAllAirports: 0
   FetchAllCustomPaths: 0
-  PlanePrefab: {fileID: 8773228758446218275, guid: 4a5dae5ee4e5dbc46836799788b9d9fc, type: 3}
+  NormalPlanePrefab: {fileID: 8773228758446218275, guid: 4a5dae5ee4e5dbc46836799788b9d9fc, type: 3}
+  AberrantPlanePrefab: {fileID: 3531309262870158179, guid: e7afd7d4805d96246bf79d941737f0a1, type: 3}
   AvailableForSimplePaths:
   - {fileID: 1912511467}
   - {fileID: 1859867232}
@@ -1808,9 +1809,10 @@ MonoBehaviour:
   - {fileID: 4921689413499994979}
   CustomPaths:
   - {fileID: 5202690}
-  NumFlights: 5
+  NumNormalFlights: 5
+  NumAberrantFlights: 3
   EarliestTime: 2
-  LatestTime: 10
+  LatestTime: 15
   MinTimeBetweenSpawns: 0.5
   CustomPathChance: 0.204
 --- !u!4 &2118143824

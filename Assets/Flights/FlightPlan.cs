@@ -55,6 +55,18 @@ public struct FlightPlan
     }
 
     /// <summary>
+    /// Calculates a vector perpendicular to where the plane should be pointed at a specified distance (as opposed to time) into the flight.
+    /// </summary>
+    /// <param name="dist"></param>
+    /// <returns>A normalized vector2 that is perpendicular to the intended path.</returns>
+    public Vector2 NormalAtDistance(float dist)
+    {
+        Vector2 tangent = (intendedPath == null) ? (destination.transform.position - origin.transform.position)
+                                                 : intendedPath.GetDirectionAtDistance(dist, EndOfPathInstruction.Stop);
+        return Vector2.Perpendicular(tangent).normalized;
+    }
+
+    /// <summary>
     /// 
     /// </summary>
     /// <returns>The length of the planned path in world coordinate units.</returns>

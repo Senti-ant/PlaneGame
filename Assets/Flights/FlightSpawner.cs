@@ -11,19 +11,21 @@ public class FlightSpawner: MonoBehaviour
     [SerializeField] bool FetchAllCustomPaths;
 
     [Header("References")]
-    [SerializeField] GameObject PlanePrefab;
+    [SerializeField] GameObject NormalPlanePrefab;
+    [SerializeField] GameObject AberrantPlanePrefab;
     [SerializeField] Airport[] AvailableForSimplePaths;
     [SerializeField] PathInformation[] CustomPaths;
 
     [Header("Spawn Parameters")]
-    [SerializeField] int NumFlights;
+    [SerializeField] int NumNormalFlights;
+    [SerializeField] int NumAberrantFlights;
     [SerializeField] float EarliestTime;
     [SerializeField] float LatestTime;
     [SerializeField] float MinTimeBetweenSpawns;
     [SerializeField] [Range(0, 1)] float CustomPathChance;
 
 
-    FlightPlan[] plannedFlights;
+    Departure[] plannedFlights;
 
     void OnValidate()
     {
@@ -43,29 +45,34 @@ public class FlightSpawner: MonoBehaviour
     {
         Airport[] airports = AvailableForSimplePaths;
 
-        plannedFlights = new FlightPlan[NumFlights];
-        for (int i = 0; i < NumFlights; i++)
-        {
-            float r = UnityEngine.Random.Range(0f, 1f);
-            plannedFlights[i] =  (r < CustomPathChance && CustomPaths.Length > 0) ? 
-                                 FlightPlan.Random(CustomPaths, EarliestTime, LatestTime) :
-                                 FlightPlan.Random(airports, EarliestTime, LatestTime);
-        }
+        plannedFlights = new Departure[NumNormalFlights + NumAberrantFlights];
+        for (int i = 0; i < NumNormalFlights; i++)
+            plannedFlights[i] = new Departure(MakePlan(airports), NormalPlanePrefab);
+        for (int i = 0; i < NumAberrantFlights; i++)
+            plannedFlights[i + NumNormalFlights] = new Departure(MakePlan(airports), AberrantPlanePrefab);
 
-        Array.Sort(plannedFlights, (f1, f2) => f1.departureTime.CompareTo(f2.departureTime));
+        Array.Sort(plannedFlights, (f1, f2) => f1.plan.departureTime.CompareTo(f2.plan.departureTime));
         StartCoroutine(SpawnFlights());
     }
 
     IEnumerator SpawnFlights()
     {
         float lastTime = 0;
-        foreach (FlightPlan flight in plannedFlights)
+        foreach (Departure flight in plannedFlights)
         {
-            yield return new WaitUntil(() => Time.timeSinceLevelLoad >= flight.departureTime
+            yield return new WaitUntil(() => Time.timeSinceLevelLoad >= flight.plan.departureTime
                                           && Time.timeSinceLevelLoad >= lastTime + MinTimeBetweenSpawns);
 
             lastTime = Time.timeSinceLevelLoad;
-            flight.origin.EnqueueFlight(flight, PlanePrefab);
+            flight.plan.origin.EnqueueFlight(flight);
         }
+    }
+
+    FlightPlan MakePlan(Airport[] airports)
+    {
+        float r = UnityEngine.Random.Range(0f, 1f);
+        return (r < CustomPathChance && CustomPaths.Length > 0) ? 
+                FlightPlan.Random(CustomPaths, EarliestTime, LatestTime) :
+                FlightPlan.Random(airports, EarliestTime, LatestTime);
     }
 }

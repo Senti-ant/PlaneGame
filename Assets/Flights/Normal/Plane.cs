@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using PathCreation;
 using UnityEngine;
 
 /// <summary>
@@ -15,16 +12,17 @@ using UnityEngine;
 public class Plane : MonoBehaviour
 {
     //Per prefab data.
-    [SerializeField] float Speed;
+    [SerializeField] protected float Speed;
 
     //Per plane data.
     public FlightPlan Plan { get; protected set; }
     public bool HasDeparted { get; protected set; } = false;
+    public bool HasCrashed {get; protected set; } = false;
 
     //The actual time the plane departed, in case this is different from the planned time.
     public double PreciseDepartureTime { get; protected set; }
 
-    public void Depart(FlightPlan plan)
+    public virtual void Depart(FlightPlan plan)
     {
         Plan = plan;
         HasDeparted = true;
@@ -33,10 +31,8 @@ public class Plane : MonoBehaviour
 
     void Update()
     {
-        if (!HasDeparted)
-            return;
-
-        Move();
+        if (HasDeparted && !HasCrashed)
+            Move();
     }
 
     /// <summary>
@@ -62,5 +58,12 @@ public class Plane : MonoBehaviour
     {
         Score.Add(10);
         Destroy(gameObject);
+    }
+
+    protected void Crash()
+    {
+        //TODO: Big explosion, Kabloom!, people scream, etc. etc.
+        Score.Subtract(20);
+        HasCrashed = true;
     }
 }
