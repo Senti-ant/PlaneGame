@@ -60,7 +60,7 @@ public class Airport : MonoBehaviour
     public void CancelNext()
     {
         lineGraphic.gameObject.SetActive(false);
-        Score.Subtract(5);
+        Score.Subtract(5, "Flight Canceled :(", transform.position);
         next = null;
     }
 

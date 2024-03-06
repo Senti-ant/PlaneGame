@@ -1846,7 +1846,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b0798a91f561642be52ea20ddb2cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 962675567}
+  scoreNumber: {fileID: 962675567}
+  explanationTextPrefab: {fileID: 8976862127601741265, guid: 0cc306082f92c2048b1155899c2a0e7e, type: 3}
+  explanationTextOffset: {x: 0, y: 2}
 --- !u!114 &2118143826
 MonoBehaviour:
   m_ObjectHideFlags: 0

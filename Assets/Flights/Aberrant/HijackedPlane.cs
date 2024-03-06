@@ -48,8 +48,7 @@ public class HijackedPlane : Plane
     {
         //TODO: Animations, VFX, etc.
         Destroy(target.gameObject);
-        Score.Subtract(20); //In addition to the penalty for crashing.
-        Crash();
+        Crash(20);
         Destroy(gameObject);
     }
 

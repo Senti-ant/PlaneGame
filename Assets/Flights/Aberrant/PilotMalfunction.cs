@@ -36,7 +36,6 @@ public class PilotMalfunction : Plane
         base.Depart(plan);
         malfunctionStart = Random.Range(MinMalfunctionStart, MaxMalfunctionStart) * plan.Length();
         malfunctionEnd = malfunctionStart + Random.Range(MinMalfunctionLength, MaxMalfunctionLength);
-        //Debug.Log($"Will start at {malfunctionStart} and end at {malfunctionEnd}");
         noiseSeed = Random.Range(-500f, 500f);
     }
     protected override void Move()

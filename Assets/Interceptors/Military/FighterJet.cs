@@ -15,7 +15,7 @@ public class FighterJet : Interceptor
     protected override void Intercept(Plane plane)
     {
         if (plane.IsFriendly)
-            Score.Subtract(10);
+            Score.Subtract(10, "Unnecessary!", transform.position);
 
         //TODO: a little animation that shows what happened.
         Destroy(plane.gameObject);

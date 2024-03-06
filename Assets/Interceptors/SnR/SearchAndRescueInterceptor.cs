@@ -20,7 +20,7 @@ public class SearchAndRescueInterceptor : Interceptor
     {
          //Unnecessary intercept costs score (else you could just click everything!)
         if (!plane.IsAberrant || !plane.IsFriendly)
-            Score.Subtract(5);
+            Score.Subtract(5, "Unnecessary!", transform.position);
         else
         {
             float timeSinceCrash = plane.HasCrashed ? (float)(Time.timeSinceLevelLoadAsDouble - plane.CrashTime)
@@ -36,7 +36,7 @@ public class SearchAndRescueInterceptor : Interceptor
                 <= 0f       =>  0m, //It never crashed, so there is no score to recuperate.
                                     //This can still save a plane from crashing all-together!
             };
-            Score.Add(score);
+            Score.Add(score, "Saved people :)", transform.position);
         }
 
         if (plane.IsFriendly)

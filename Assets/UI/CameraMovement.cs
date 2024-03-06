@@ -22,6 +22,9 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] float MaxZoom = 10;
     [SerializeField] float ZoomSpeed = 5000;
 
+    [Header("Fast Forward")]
+    [SerializeField] float FFSpeed = 3;
+
     Vector2 movement;
     float currentSpeed 
         => Speed * (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? SpeedMultiplierWhenShift : 1);
@@ -37,11 +40,16 @@ public class CameraMovement : MonoBehaviour
     {
         Vector2 inputMovement = TakeMovementInput().normalized * currentSpeed;
         movement = Vector2.Lerp(movement, inputMovement, Responsiveness * Time.deltaTime);
-        transform.position += Time.deltaTime * new Vector3(movement.x, movement.y);
+        transform.position += Time.unscaledDeltaTime * new Vector3(movement.x, movement.y);
         ClampCameraPosition();
 
         mainCam.orthographicSize 
             = Mathf.Clamp(mainCam.orthographicSize + TakeZoomInput() * ZoomSpeed * Time.deltaTime, MinZoom, MaxZoom);
+    
+        if (Input.GetKeyDown(KeyCode.Space))
+            Time.timeScale = FFSpeed;
+        if (Input.GetKeyUp(KeyCode.Space))
+            Time.timeScale = 1;
     }
 
     void ClampCameraPosition()

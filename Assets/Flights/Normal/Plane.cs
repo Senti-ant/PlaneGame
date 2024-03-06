@@ -58,9 +58,7 @@ public class Plane : MonoBehaviour
         float timeTaken = (float)(Time.timeSinceLevelLoadAsDouble - PreciseDepartureTime);
         float dist = timeTaken * Speed;
 
-        transform.position = Plan.PointAtDistance(dist);
-        transform.rotation = Plan.RotationAtDistance(dist);
-
+        transform.SetPositionAndRotation(Plan.PointAtDistance(dist), Plan.RotationAtDistance(dist));
         if (Plan.ShouldLand(dist))
             Land();
     }
@@ -71,14 +69,14 @@ public class Plane : MonoBehaviour
     /// </summary>
     protected void Land()
     {
-        Score.Add(10);
+        Score.Add(10, "Landed", transform.position);
         Destroy(gameObject);
     }
 
-    protected void Crash()
+    protected void Crash(int additionalScoreSubtraction = 0)
     {
         //TODO: Big explosion, Kabloom!, people scream, etc. etc.
-        Score.Subtract(20);
+        Score.Subtract(20 + additionalScoreSubtraction, "Crashed!", transform.position);
         HasCrashed = true;
         CrashTime = Time.timeSinceLevelLoadAsDouble;
     }
