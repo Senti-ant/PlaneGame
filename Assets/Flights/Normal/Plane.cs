@@ -21,7 +21,20 @@ public class Plane : MonoBehaviour
 
     //The actual time the plane departed, in case this is different from the planned time.
     public double PreciseDepartureTime { get; protected set; }
+    public double CrashTime {get; protected set; }
 
+    //All unfriendly planes are aberrant, but not all aberrant planes are unfriendly. The aberration could be an honest mistake!
+    //Rule of thumb: You should only mark a plane as !IsFriendly if it would make sense to intercept it with a fighter jet.
+    //So e.g. hijacked plane: IsFriendly => false
+    //but plane where pilot is an idiot: IsFriendly => true.
+    public virtual bool IsAberrant => false;
+    public virtual bool IsFriendly => true; 
+
+    /// <summary>
+    /// Call this function when the plane is ready to leave. It will set up the necessary values.
+    /// Attempting to move a plane without departing first is undefined behaviour.
+    /// </summary>
+    /// <param name="plan">The plan we must follow when moving.</param>
     public virtual void Depart(FlightPlan plan)
     {
         Plan = plan;
@@ -36,8 +49,9 @@ public class Plane : MonoBehaviour
     }
 
     /// <summary>
-    /// Implement the logic for how the plane moves throughout the scene here.
-    /// This includes physically moving the object, but also thinngs like landing and crashing the plane.
+    /// Takes the plane to its next position. 
+    /// Also lands or crashes the plane when appropriate.
+    /// Do not call move on a plane that has not departed, or that has crashed.
     /// </summary>
     protected virtual void Move()
     {
@@ -53,6 +67,7 @@ public class Plane : MonoBehaviour
 
     /// <summary>
     /// Safely lands the plane at its current planned destination.
+    /// This takes the plane out of the game, as it is no longer the player's responsibility.
     /// </summary>
     protected void Land()
     {
@@ -65,5 +80,6 @@ public class Plane : MonoBehaviour
         //TODO: Big explosion, Kabloom!, people scream, etc. etc.
         Score.Subtract(20);
         HasCrashed = true;
+        CrashTime = Time.timeSinceLevelLoadAsDouble;
     }
 }

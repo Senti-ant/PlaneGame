@@ -28,6 +28,9 @@ public class PilotMalfunction : Plane
     float malfunctionStart;
     float malfunctionEnd; //Not a happy ending.
 
+
+    public override bool IsAberrant => true;
+    public override bool IsFriendly => true;
     public override void Depart(FlightPlan plan)
     {
         base.Depart(plan);

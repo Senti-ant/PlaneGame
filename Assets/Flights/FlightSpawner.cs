@@ -12,12 +12,16 @@ public class FlightSpawner: MonoBehaviour
 
     [Header("References")]
     [SerializeField] GameObject NormalPlanePrefab;
-    [SerializeField] GameObject AberrantPlanePrefab;
+    [SerializeField] GameObject[] AberrantPlanePrefabs;
     [SerializeField] Airport[] AvailableForSimplePaths;
     [SerializeField] PathInformation[] CustomPaths;
 
     [Header("Spawn Parameters")]
     [SerializeField] int NumNormalFlights;
+
+    //Note: Which aberrant flights are spawned is random, since otherwise the player could 'cheat' using meta-info about
+    //the level. However, if you want to influence the odds a hacky way to do that is to just put the same aberrant prefab
+    //in the aberrant prefabs list multiple times.
     [SerializeField] int NumAberrantFlights;
     [SerializeField] float EarliestTime;
     [SerializeField] float LatestTime;
@@ -49,7 +53,10 @@ public class FlightSpawner: MonoBehaviour
         for (int i = 0; i < NumNormalFlights; i++)
             plannedFlights[i] = new Departure(MakePlan(airports), NormalPlanePrefab);
         for (int i = 0; i < NumAberrantFlights; i++)
-            plannedFlights[i + NumNormalFlights] = new Departure(MakePlan(airports), AberrantPlanePrefab);
+        {
+            GameObject randomPrefab = AberrantPlanePrefabs[UnityEngine.Random.Range(0, AberrantPlanePrefabs.Length)];
+            plannedFlights[i + NumNormalFlights] = new Departure(MakePlan(airports), randomPrefab);
+        }
 
         Array.Sort(plannedFlights, (f1, f2) => f1.plan.departureTime.CompareTo(f2.plan.departureTime));
         StartCoroutine(SpawnFlights());

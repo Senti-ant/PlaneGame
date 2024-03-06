@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 276378129}
   m_Layer: 0
   m_Name: Building
-  m_TagString: Untagged
+  m_TagString: HijackerTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -736,7 +736,7 @@ GameObject:
   - component: {fileID: 693151315}
   m_Layer: 0
   m_Name: Building (2)
-  m_TagString: Untagged
+  m_TagString: HijackerTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -820,7 +820,7 @@ GameObject:
   - component: {fileID: 738183929}
   m_Layer: 0
   m_Name: Building (4)
-  m_TagString: Untagged
+  m_TagString: HijackerTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1112,7 +1112,7 @@ GameObject:
   - component: {fileID: 1166340156}
   m_Layer: 0
   m_Name: Building (1)
-  m_TagString: Untagged
+  m_TagString: HijackerTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1416,7 +1416,7 @@ GameObject:
   - component: {fileID: 1573794800}
   m_Layer: 0
   m_Name: Building (3)
-  m_TagString: Untagged
+  m_TagString: HijackerTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1570,7 +1570,7 @@ GameObject:
   - component: {fileID: 1709259564}
   m_Layer: 0
   m_Name: Building (5)
-  m_TagString: Untagged
+  m_TagString: HijackerTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1779,6 +1779,7 @@ GameObject:
   - component: {fileID: 2118143824}
   - component: {fileID: 2118143823}
   - component: {fileID: 2118143825}
+  - component: {fileID: 2118143826}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -1801,7 +1802,10 @@ MonoBehaviour:
   FetchAllAirports: 0
   FetchAllCustomPaths: 0
   NormalPlanePrefab: {fileID: 8773228758446218275, guid: 4a5dae5ee4e5dbc46836799788b9d9fc, type: 3}
-  AberrantPlanePrefab: {fileID: 3531309262870158179, guid: e7afd7d4805d96246bf79d941737f0a1, type: 3}
+  AberrantPlanePrefabs:
+  - {fileID: 4899739892442154330, guid: 65ad8b2943db8ad4dacf6170b301983a, type: 3}
+  - {fileID: 3531309262870158179, guid: e7afd7d4805d96246bf79d941737f0a1, type: 3}
+  - {fileID: 3531309262870158179, guid: e7afd7d4805d96246bf79d941737f0a1, type: 3}
   AvailableForSimplePaths:
   - {fileID: 1912511467}
   - {fileID: 1859867232}
@@ -1812,7 +1816,7 @@ MonoBehaviour:
   NumNormalFlights: 5
   NumAberrantFlights: 3
   EarliestTime: 2
-  LatestTime: 15
+  LatestTime: 30
   MinTimeBetweenSpawns: 0.5
   CustomPathChance: 0.204
 --- !u!4 &2118143824
@@ -1843,6 +1847,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 962675567}
+--- !u!114 &2118143826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118143822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08070400bd891ff4ba58a61f5639b0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftClickPrefab: {fileID: 2660345496382669882, guid: 03eeb0657bc8d0a499ed5f888d88a1d0, type: 3}
+  RightClickPrefab: {fileID: 7901120114958447795, guid: 23950206b45a1ee4a81ec5216502f314, type: 3}
 --- !u!1001 &4921689413499994978
 PrefabInstance:
   m_ObjectHideFlags: 0
