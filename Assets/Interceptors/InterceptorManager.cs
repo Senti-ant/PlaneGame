@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.WSA;
 
 public class InterceptorManager : MonoBehaviour
 {
     [SerializeField] GameObject LeftClickPrefab;
     [SerializeField] GameObject RightClickPrefab;
+
+    [HideInInspector] public UnityEvent<Plane> OnRescue; //Triggers when a friendly plane is intercepted.
+    [HideInInspector] public UnityEvent<Plane> OnKill; //Triggers when a hijacked plane is intercepted.
 
 
     Camera mainCam;
@@ -54,5 +58,6 @@ public class InterceptorManager : MonoBehaviour
 
         Interceptor launched = Instantiate(prefab, closestToTarget.transform.position, Quaternion.identity).GetComponent<Interceptor>();
         launched.Target = target;
+        launched.manager = this;
     }
 }

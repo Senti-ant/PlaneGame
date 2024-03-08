@@ -76,8 +76,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 3
-  MinMalfunctionStart: 0.176
-  MaxMalfunctionStart: 0.642
+  OnLand:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrash:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAberrate:
+    m_PersistentCalls:
+      m_Calls: []
+  MinMalfunctionStart: 0.108
+  MaxMalfunctionStart: 0.632
   MinMalfunctionLength: 10
   MaxMalfunctionLength: 25
   NoiseSize: 2.5

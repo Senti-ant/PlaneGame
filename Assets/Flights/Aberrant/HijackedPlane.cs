@@ -11,6 +11,7 @@ public class HijackedPlane : Plane
 
 
     float malfunctionStart;
+    bool malfunctionStarted = false;
     Transform target;
 
     public override bool IsAberrant => true;
@@ -31,7 +32,15 @@ public class HijackedPlane : Plane
         {
             target = GameObject.FindWithTag("HijackerTarget").transform;
             if (TooCloseToTargetSoItFeelsUnfair())
+            {
                 target = null; //Try again next frame.
+                base.Move();
+            }
+            else if (!malfunctionStarted)
+            {
+                malfunctionStarted = true;
+                OnAberrate.Invoke();
+            }
         }
         else
         {

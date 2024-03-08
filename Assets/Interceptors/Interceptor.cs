@@ -10,6 +10,7 @@ public abstract class Interceptor : MonoBehaviour
     [SerializeField] float Speed;
     [SerializeField] float MinDistToHit;
     [HideInInspector] public Plane Target { get; set; }
+    [HideInInspector] public InterceptorManager manager { get; set; }
 
     void Update()
     {
@@ -31,7 +32,8 @@ public abstract class Interceptor : MonoBehaviour
     }
 
     /// <summary>
-    /// Performs the special action of this interceptor type upon the plane
+    /// Performs the special action of this interceptor type upon the plane.
+    /// Should also call any events on the manager as appropriate.
     /// </summary>
     /// <param name="plane">The plane to be intercepted.</param>
     protected abstract void Intercept(Plane plane);

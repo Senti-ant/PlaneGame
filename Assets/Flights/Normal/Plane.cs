@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Represents a plane within the game world.
@@ -29,6 +31,10 @@ public class Plane : MonoBehaviour
     //but plane where pilot is an idiot: IsFriendly => true.
     public virtual bool IsAberrant => false;
     public virtual bool IsFriendly => true; 
+
+    [HideInInspector] public UnityEvent OnLand;
+    [HideInInspector] public UnityEvent OnCrash;
+    [HideInInspector] public UnityEvent OnAberrate;
 
     /// <summary>
     /// Call this function when the plane is ready to leave. It will set up the necessary values.
@@ -70,6 +76,7 @@ public class Plane : MonoBehaviour
     protected void Land()
     {
         Score.Add(10, "Landed", transform.position);
+        OnLand.Invoke();
         Destroy(gameObject);
     }
 
@@ -79,5 +86,6 @@ public class Plane : MonoBehaviour
         Score.Subtract(20 + additionalScoreSubtraction, "Crashed!", transform.position);
         HasCrashed = true;
         CrashTime = Time.timeSinceLevelLoadAsDouble;
+        OnCrash.Invoke();
     }
 }

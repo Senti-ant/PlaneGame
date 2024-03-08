@@ -5,12 +5,18 @@ public class Score : MonoBehaviour
 {
     static Score instance;
 
+    [Header("References")]
     [SerializeField] TMP_Text scoreNumber;
-
     [SerializeField] GameObject explanationTextPrefab;
     [SerializeField] Vector2 explanationTextOffset;
-    decimal score = 0;
 
+    [Header("Display")]
+    [SerializeField] int goalScore = -1;
+    [SerializeField] int numDigits = 4;
+    [SerializeField] Color successColour;
+    [SerializeField] Color failureColour;
+
+    decimal score = 0;
     RectTransform canvas;
 
     //There should only be one Score per scene!
@@ -19,11 +25,27 @@ public class Score : MonoBehaviour
     { 
         instance = this;
         canvas = FindObjectOfType<Canvas>().GetComponent<RectTransform>(); 
+        instance.scoreNumber.text = AsText();
     }
 
     public static float AsFloat() => (float)instance.score;
     public static int AsInt() => (int)instance.score;
-    public static string AsText() => AsInt().ToString("D4");
+    public static string AsText()
+    {
+        string t = AsInt().ToString($"D{instance.numDigits}");
+        if (instance.goalScore <= 0) return t;
+
+        t += " / " + ((int)instance.goalScore).ToString($"D{instance.numDigits}");
+        return t;
+    }
+
+    public static bool EvaluateGoal()
+    {
+        bool result = instance.score >= instance.goalScore;
+        instance.scoreNumber.color = result ? instance.successColour : instance.failureColour;
+        return result;
+    }
+
 
     public static void Add(decimal a) { instance.score += a; instance.scoreNumber.text = AsText(); }
     public static void Subtract(decimal s) {instance.score -= s; instance.scoreNumber.text = AsText(); }

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Departure 
 {
@@ -16,6 +18,10 @@ public class Airport : MonoBehaviour
 {
     [SerializeField] GameObject ApprovalDialoguePrefab;
     [SerializeField] GameObject FlightPlanLinePrefab;
+
+    //Events: Use them so scripts that the airport doesn't know about can do things when something happens here.
+    [HideInInspector] public UnityEvent<Plane> OnFlightDeparts;
+    [HideInInspector] public UnityEvent OnFlightCancelled;
 
     Queue<Departure> departures;
     Departure next;
@@ -55,6 +61,8 @@ public class Airport : MonoBehaviour
 
         lineGraphic.gameObject.SetActive(false);
         next = null;
+
+        OnFlightDeparts.Invoke(plane);
     }
 
     public void CancelNext()
@@ -62,6 +70,8 @@ public class Airport : MonoBehaviour
         lineGraphic.gameObject.SetActive(false);
         Score.Subtract(5, "Flight Canceled :(", transform.position);
         next = null;
+
+        OnFlightCancelled.Invoke();
     }
 
     void CreateApprovalDialogue(Departure departure)

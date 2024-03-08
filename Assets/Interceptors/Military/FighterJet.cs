@@ -16,6 +16,8 @@ public class FighterJet : Interceptor
     {
         if (plane.IsFriendly)
             Score.Subtract(10, "Unnecessary!", transform.position);
+        else
+            manager.OnKill.Invoke(plane);
 
         //TODO: a little animation that shows what happened.
         Destroy(plane.gameObject);

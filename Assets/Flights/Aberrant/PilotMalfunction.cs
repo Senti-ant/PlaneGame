@@ -27,6 +27,7 @@ public class PilotMalfunction : Plane
     float noiseSeed;
     float malfunctionStart;
     float malfunctionEnd; //Not a happy ending.
+    bool malfunctionStarted = false;
 
 
     public override bool IsAberrant => true;
@@ -45,6 +46,12 @@ public class PilotMalfunction : Plane
 
         transform.position = PointAtDistance(dist);
         transform.rotation = RotationAtDistance(dist);
+
+        if (dist > malfunctionStart && !malfunctionStarted)
+        {
+            malfunctionStarted = true;
+            OnAberrate.Invoke();
+        }
 
         if (dist > malfunctionEnd)
             Crash();

@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
-public class FlightSpawner: MonoBehaviour
+public class FlightSchedule: MonoBehaviour
 {
     [Header("I'm too lazy to make actual buttons so have some bools.")]
     [SerializeField] bool FetchAllAirports;
@@ -15,6 +16,8 @@ public class FlightSpawner: MonoBehaviour
     [SerializeField] GameObject[] AberrantPlanePrefabs;
     [SerializeField] Airport[] AvailableForSimplePaths;
     [SerializeField] PathInformation[] CustomPaths;
+    [SerializeField] GameObject NextLevelMenu;
+    [SerializeField] GameObject RetryMenu;
 
     [Header("Spawn Parameters")]
     [SerializeField] int NumNormalFlights;
@@ -73,6 +76,14 @@ public class FlightSpawner: MonoBehaviour
             lastTime = Time.timeSinceLevelLoad;
             flight.plan.origin.EnqueueFlight(flight);
         }
+
+        yield return new WaitUntil(() => !FindObjectOfType<Plane>());
+
+        bool didWellEnough = Score.EvaluateGoal();
+        if (didWellEnough)
+            NextLevelMenu.SetActive(true);
+        else
+            RetryMenu.SetActive(true);
     }
 
     FlightPlan MakePlan(Airport[] airports)
@@ -82,4 +93,7 @@ public class FlightSpawner: MonoBehaviour
                 FlightPlan.Random(CustomPaths, EarliestTime, LatestTime) :
                 FlightPlan.Random(airports, EarliestTime, LatestTime);
     }
+
+    public void GoToNextLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    public void Retry() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 }

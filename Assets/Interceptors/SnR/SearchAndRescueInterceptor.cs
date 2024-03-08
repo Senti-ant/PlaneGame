@@ -37,6 +37,7 @@ public class SearchAndRescueInterceptor : Interceptor
                                     //This can still save a plane from crashing all-together!
             };
             Score.Add(score, "Saved people :)", transform.position);
+            manager.OnRescue.Invoke(plane);
         }
 
         if (plane.IsFriendly)
