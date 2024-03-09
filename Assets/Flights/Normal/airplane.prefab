@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7806015581667499261}
   - component: {fileID: 5470104648894842110}
   - component: {fileID: 704003095796054436}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: airplane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1bee81800753e664c96bb810002a7b00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,6 +99,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 3
+  OnLand:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrash:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAberrate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &704003095796054436
 BoxCollider2D:
   m_ObjectHideFlags: 0

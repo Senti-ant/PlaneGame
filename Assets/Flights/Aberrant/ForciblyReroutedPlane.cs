@@ -1,9 +1,10 @@
 using UnityEngine;
 
 /// <summary>
-/// This represents a plane that was hijacked and used to attack a building.
+/// This represents a plane with less evil hijackers than the hijacked plane.
+/// They just want to force the pilot to go to a different (unplanned) destination.
 /// </summary>
-public class HijackedPlane : Plane
+public class ForciblyReroutedPlane : Plane
 {
     [Header("Timings")]
     [SerializeField] [Range(0, 1)] float MinMalfunctionStart; //As a fraction of the plan length.
@@ -14,8 +15,8 @@ public class HijackedPlane : Plane
 
 
     float malfunctionStart;
-    bool malfunctionStarted = false;
     Transform target;
+    Airport[] potentialTargets;
 
     public override bool IsAberrant => true;
     public override bool IsFriendly => false;
@@ -23,6 +24,7 @@ public class HijackedPlane : Plane
     {
         base.Depart(plan);
         malfunctionStart = Random.Range(MinMalfunctionStart, MaxMalfunctionStart) * plan.Length();
+        potentialTargets = FindObjectsOfType<Airport>();
     }
     protected override void Move()
     {
@@ -31,19 +33,16 @@ public class HijackedPlane : Plane
 
         if (dist < malfunctionStart)
             base.Move();
+        //Only executed once since there is always at least one valid target available.
+        //(At least, assuming you correctly set up the level to have more than two airports which aren't all bunched up).
         else if (target == null)
         {
-            target = GameObject.FindWithTag("HijackerTarget").transform;
-            if (TooCloseToTargetSoItFeelsUnfair())
-            {
-                target = null; //Try again next frame.
-                base.Move();
-            }
-            else if (!malfunctionStarted)
-            {
-                malfunctionStarted = true;
-                OnAberrate.Invoke();
-            }
+            int i = Random.Range(0, potentialTargets.Length);
+            while (potentialTargets[i] == Plan.destination || potentialTargets[i] == Plan.origin || TooClose(i))
+                i = (i + 1) % potentialTargets.Length;
+            
+            target = potentialTargets[i].transform;
+            OnAberrate.Invoke();
         }
         else
         {
@@ -52,20 +51,20 @@ public class HijackedPlane : Plane
             transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
 
             if (dir.magnitude < MinDistToHit)
-                Hit();
+                LandIllegally();
         }
     }
 
-    void Hit()
+    void LandIllegally()
     {
         //TODO: Animations, VFX, etc.
-        Destroy(target.gameObject);
-        Crash(20);
+        Score.Subtract(15, "Wrong airport!!", transform.position);
         Destroy(gameObject);
     }
 
-    bool TooCloseToTargetSoItFeelsUnfair()
+    bool TooClose(int i)
     {
-        return (target.position - transform.position).sqrMagnitude < 50;
+        return (potentialTargets[i].transform.position - transform.position).sqrMagnitude < 50;
     }
 }
+

@@ -49,6 +49,13 @@ public static class Tween
         return x => Mathf.Lerp(min, max, lerper(x));
     }
 
+    //Helper function helps you convert animation from a => b to a => b => a
+    //Always do this first, and then WithRange.
+    public static Func<float, float> PingPong(Func<float, float> lerper)
+    {
+        return x => (x < 0.5f) ? lerper(2*x) : 1f - lerper(2 * (x - 0.5f));
+    }
+
     //Helper functions for using other data types than floats.
     public static Func<float, Vector2> With2DRange(Vector2 min, Vector2 max, Func<float, float> lerper)
     {
