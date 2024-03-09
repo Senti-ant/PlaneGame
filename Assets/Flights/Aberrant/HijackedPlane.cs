@@ -33,7 +33,14 @@ public class HijackedPlane : Plane
             base.Move();
         else if (target == null)
         {
-            target = GameObject.FindWithTag("HijackerTarget").transform;
+            GameObject[] targets = GameObject.FindGameObjectsWithTag("HijackerTarget");
+            if (targets.Length == 0)
+            {
+                base.Move();
+                return;
+            }
+
+            target = targets[Random.Range(0, targets.Length)].transform;
             if (TooCloseToTargetSoItFeelsUnfair())
             {
                 target = null; //Try again next frame.

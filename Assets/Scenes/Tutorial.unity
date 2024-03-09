@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The challenge is to come up with a correct response as soon as possible.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1445,6 +1445,10 @@ MonoBehaviour:
   scoreNumber: {fileID: 1171927370}
   explanationTextPrefab: {fileID: 8976862127601741265, guid: 0cc306082f92c2048b1155899c2a0e7e, type: 3}
   explanationTextOffset: {x: 0, y: 2}
+  goalScore: -1
+  numDigits: 4
+  successColour: {r: 0, g: 0, b: 0, a: 0}
+  failureColour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1459024959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,7 +1506,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000e5ed42e1
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

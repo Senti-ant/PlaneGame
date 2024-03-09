@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4447749435993314884
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6089360714542261666, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_Name
+      value: Botched Landing Plane Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.63131
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.9049454
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708070916343471982, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1223317610159738977, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+--- !u!1 &7581904278983406566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6089360714542261666, guid: 944050dede78e3346a3b91275b239ca7, type: 3}
+  m_PrefabInstance: {fileID: 4447749435993314884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &427656982204146281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581904278983406566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef2a40091999664c8319ec64e277028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 3
+  OnLand:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrash:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAberrate:
+    m_PersistentCalls:
+      m_Calls: []
+  MinDistFromAirport: 2
+  MaxDistFromAirport: 4.5

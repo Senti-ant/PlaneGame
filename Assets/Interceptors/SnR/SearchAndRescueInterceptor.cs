@@ -32,7 +32,8 @@ public class SearchAndRescueInterceptor : Interceptor
                 >= 0.6f     =>  5m,
                 >= 0.4f     =>  7.5m,
                 >= 0.2f     =>  10m,
-                > 0f        =>  15m,
+                >= 0.1f     =>  15m,
+                > 0f        =>  20m,
                 <= 0f       =>  0m, //It never crashed, so there is no score to recuperate.
                                     //This can still save a plane from crashing all-together!
             };

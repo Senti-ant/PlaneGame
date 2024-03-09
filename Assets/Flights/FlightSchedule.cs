@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -77,7 +78,8 @@ public class FlightSchedule: MonoBehaviour
             flight.plan.origin.EnqueueFlight(flight);
         }
 
-        yield return new WaitUntil(() => !FindObjectOfType<Plane>());
+        yield return new WaitUntil(() => Time.timeSinceLevelLoad > lastTime + 5
+                                         && !FindObjectOfType<Plane>());
 
         bool didWellEnough = Score.EvaluateGoal();
         if (didWellEnough)

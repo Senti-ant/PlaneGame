@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RerouteLevel.unity
     guid: 60fb40dfddc8fc646ac8a3c82894ae76
+  - enabled: 1
+    path: Assets/Scenes/CommFailureLevel.unity
+    guid: 14c9c21ebb3c30748a43d83278899805
+  - enabled: 1
+    path: Assets/Scenes/NightLevel.unity
+    guid: 6f38b54007938214baa3ff1aa5f9f3f5
+  - enabled: 1
+    path: Assets/Scenes/FinalLevel.unity
+    guid: 46281e80b165f7c40a10046c81252e16
   m_configObjects: {}
