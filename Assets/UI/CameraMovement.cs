@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Camera))]
 public class CameraMovement : MonoBehaviour
@@ -38,6 +39,9 @@ public class CameraMovement : MonoBehaviour
 
     void LateUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene(0);
+
         Vector2 inputMovement = TakeMovementInput().normalized * currentSpeed;
         movement = Vector2.Lerp(movement, inputMovement, Responsiveness * Time.deltaTime);
         transform.position += Time.unscaledDeltaTime * new Vector3(movement.x, movement.y);

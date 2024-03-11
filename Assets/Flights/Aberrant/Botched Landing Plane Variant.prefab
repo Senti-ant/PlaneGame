@@ -86,4 +86,4 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   MinDistFromAirport: 2
-  MaxDistFromAirport: 4.5
+  MaxDistFromAirport: 3

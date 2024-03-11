@@ -96,6 +96,7 @@ public class FlightSchedule: MonoBehaviour
                 FlightPlan.Random(airports, EarliestTime, LatestTime);
     }
 
-    public void GoToNextLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    public void GoToNextLevel()
+        => SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
     public void Retry() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 }
