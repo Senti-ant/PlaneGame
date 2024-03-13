@@ -22,6 +22,11 @@ public class PilotMalfunction : Plane
     [SerializeField] [Range(0, 1)] float NoisePersistance;
     [SerializeField] [Min(1)] float NoiseLacunarity;
 
+    [Header("Too lazy to make separate script for this")]
+    [SerializeField] AudioSource planeFlyingAudioSource;
+    [SerializeField] AudioSource copyPlaneFlyingAudioSource;
+    [SerializeField] AudioClip erraticSounds;
+
 
     //Per-plane data.
     float noiseSeed;
@@ -50,6 +55,9 @@ public class PilotMalfunction : Plane
         if (dist > malfunctionStart && !malfunctionStarted)
         {
             malfunctionStarted = true;
+
+            planeFlyingAudioSource.clip = erraticSounds;
+            copyPlaneFlyingAudioSource.clip = erraticSounds;
             OnAberrate.Invoke();
         }
 

@@ -58,6 +58,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5470104648894842110, guid: 4a5dae5ee4e5dbc46836799788b9d9fc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4a5dae5ee4e5dbc46836799788b9d9fc, type: 3}
+--- !u!82 &2724224741053002107 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7858532815972529723, guid: 4a5dae5ee4e5dbc46836799788b9d9fc, type: 3}
+  m_PrefabInstance: {fileID: 5242609989851383616}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3531309262870158179 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8773228758446218275, guid: 4a5dae5ee4e5dbc46836799788b9d9fc, type: 3}
@@ -94,3 +99,11 @@ MonoBehaviour:
   NoiseOctaves: 3
   NoisePersistance: 0.5
   NoiseLacunarity: 2
+  planeFlyingAudioSource: {fileID: 4175377250721127126}
+  copyPlaneFlyingAudioSource: {fileID: 2724224741053002107}
+  erraticSounds: {fileID: 8300000, guid: 1c52df1664314984ba5ed6b1cee54c2e, type: 3}
+--- !u!82 &4175377250721127126 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8156183296074276246, guid: 4a5dae5ee4e5dbc46836799788b9d9fc, type: 3}
+  m_PrefabInstance: {fileID: 5242609989851383616}
+  m_PrefabAsset: {fileID: 0}

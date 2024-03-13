@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 263663927, guid: e7afd7d4805d96246bf79d941737f0a1, type: 3}
       propertyPath: MaxMalfunctionStart
-      value: 0.38
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 263663927, guid: e7afd7d4805d96246bf79d941737f0a1, type: 3}
       propertyPath: MinMalfunctionStart
@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3531309262870158179, guid: e7afd7d4805d96246bf79d941737f0a1, type: 3}
       propertyPath: m_Name
-      value: TutorialAberration
+      value: TutorialAberration Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7afd7d4805d96246bf79d941737f0a1, type: 3}

@@ -39,7 +39,7 @@ public class CameraMovement : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
             SceneManager.LoadScene(0);
 
         Vector2 inputMovement = TakeMovementInput().normalized * currentSpeed;

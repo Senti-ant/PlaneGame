@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8773228758446218275, guid: 4a5dae5ee4e5dbc46836799788b9d9fc, type: 3}
       propertyPath: m_Name
-      value: HijackedPlane
+      value: HijackedPlane Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5470104648894842110, guid: 4a5dae5ee4e5dbc46836799788b9d9fc, type: 3}
@@ -76,6 +76,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 3
+  OnLand:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrash:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAberrate:
+    m_PersistentCalls:
+      m_Calls: []
+  CrashFXPrefab: {fileID: 6318380848660325101, guid: 3acef3c8637a0cd408ade479b90df733, type: 3}
   MinMalfunctionStart: 0.124
   MaxMalfunctionStart: 0.925
   MinDistToHit: 1

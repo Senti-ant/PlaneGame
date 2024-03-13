@@ -12,8 +12,8 @@ public class TextSystem : MonoBehaviour
     Image TextBar;
     [SerializeField]
     TMP_Text Text;
-    //[SerializeField]
-    //RandomSFX TypingNoises;
+    [SerializeField]
+    RandomSFX TypingNoises;
 
     Queue<Message> messages; 
 
@@ -61,8 +61,8 @@ public class TextSystem : MonoBehaviour
             
             if (toDisplay.typeOut)
             {
-                //if (TypingNoises != null) 
-                //    TypingNoises.Play();
+                if (TypingNoises != null) 
+                    TypingNoises.Play();
                 for (int i = 0; i < toDisplay.content.Length; i++)
                 {
                     Text.text += toDisplay.content[i];

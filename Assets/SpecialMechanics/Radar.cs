@@ -14,9 +14,11 @@ public class Radar : MonoBehaviour
     void Start() => lastPulseTime = -PulseCooldown;
     void Update()
     {
-        if (Input.GetMouseButtonDown(2) && Time.timeSinceLevelLoad > lastPulseTime + PulseCooldown)
+        if (Input.GetKeyDown(KeyCode.R) && Time.timeSinceLevelLoad > lastPulseTime + PulseCooldown)
         {
             lastPulseTime = Time.timeSinceLevelLoad;
+
+            GetComponent<RandomSFX>().Play();
             StartCoroutine(SendRadarPulse());
         }
     }

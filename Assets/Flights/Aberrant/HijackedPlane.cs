@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class HijackedPlane : Plane
 {
+    [SerializeField] GameObject CrashFXPrefab;
     [Header("Timings")]
     [SerializeField] [Range(0, 1)] float MinMalfunctionStart; //As a fraction of the plan length.
     [SerializeField] [Range(0, 1)] float MaxMalfunctionStart; //As a fraction of the plan length.
@@ -65,7 +66,9 @@ public class HijackedPlane : Plane
 
     void Hit()
     {
-        //TODO: Animations, VFX, etc.
+        GameObject fx = Instantiate(CrashFXPrefab, target.position, Quaternion.identity);
+        Destroy(fx, 10f);
+        
         Destroy(target.gameObject);
         Crash(20);
         Destroy(gameObject);

@@ -54,6 +54,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] Vector2 BuildingPosition;
     [SerializeField] GameObject DoOverButton;
     [SerializeField] GameObject NextLevelButton;
+    [SerializeField] AudioSource Music;
 
     TextSystem textSystem;
 
@@ -172,6 +173,7 @@ public class Tutorial : MonoBehaviour
 
         //Wait until the plane gets hijacked.
         yield return WaitFor(latestPlane.OnAberrate, latestPlane);
+        Music.Stop();
         textSystem.RequestDisplay(MainPath[12]);
 
         //Then until it gets either gets intercepted or hits the building.

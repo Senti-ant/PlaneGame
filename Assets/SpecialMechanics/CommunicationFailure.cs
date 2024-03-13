@@ -9,7 +9,11 @@ public class CommunicationFailure : MonoBehaviour
     [Header("What is and isn't visible")]
     [SerializeField] LayerMask VisibleWhenNoOutage;
     [SerializeField] LayerMask AlwaysVisible;
-    [SerializeField] Image OutageImage;
+
+    [Header("References")]
+    [SerializeField] RawImage OutageImage;
+    [SerializeField] RandomSFX GlitchSounds;
+    [SerializeField] AudioSource NoiseSound;
 
     [Header("Outage parameters")]
     [SerializeField] int MinNumOutages;
@@ -67,6 +71,8 @@ public class CommunicationFailure : MonoBehaviour
         if (mainCam.cullingMask == AlwaysVisible)
             return;
 
+        GlitchSounds.Play();
+        NoiseSound.Play();
         StartCoroutine(TemporaryOutageEffect());
         mainCam.cullingMask = AlwaysVisible;
     }
@@ -77,6 +83,8 @@ public class CommunicationFailure : MonoBehaviour
         if (mainCam.cullingMask == VisibleWhenNoOutage)
             return;
 
+        GlitchSounds.Play();
+        NoiseSound.Stop();
         StartCoroutine(TemporaryOutageEffect());
         mainCam.cullingMask = VisibleWhenNoOutage;
     }

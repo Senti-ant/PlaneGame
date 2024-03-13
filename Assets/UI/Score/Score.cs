@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class Score : MonoBehaviour
 {
@@ -11,11 +12,16 @@ public class Score : MonoBehaviour
     [SerializeField] Vector2 explanationTextOffset;
 
     [Header("Display")]
-    [SerializeField] int goalScore = -1;
+    [SerializeField] int beginnerScore = -1;
+    [FormerlySerializedAs("goalScore")]
+    [SerializeField] int intermediateScore = -1;
+    [SerializeField] int advancedScore = -1;
+
     [SerializeField] int numDigits = 4;
     [SerializeField] Color successColour;
     [SerializeField] Color failureColour;
 
+    int goalScore;
     decimal score = 0;
     RectTransform canvas;
 
@@ -25,6 +31,14 @@ public class Score : MonoBehaviour
     { 
         instance = this;
         canvas = FindObjectOfType<Canvas>().GetComponent<RectTransform>(); 
+
+        int difficulty = PlayerPrefs.HasKey("Difficulty") ? PlayerPrefs.GetInt("Difficulty") : 1;
+        goalScore = difficulty switch {
+            0 => beginnerScore,
+            1 => intermediateScore,
+            2 => advancedScore,
+            _ => -1
+        };
         instance.scoreNumber.text = AsText();
     }
 
@@ -42,7 +56,7 @@ public class Score : MonoBehaviour
     public static bool EvaluateGoal()
     {
         bool result = instance.score >= instance.goalScore;
-        instance.scoreNumber.color = result ? instance.successColour : instance.failureColour;
+        instance.scoreNumber.color = result ? instance.successColour : instance.failureColour;       
         return result;
     }
 
